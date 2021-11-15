@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scroll-wrapper, .scroll-section {
+  width: 100%;
+  height: 100vh;
+}
+
+.scroll-wrapper {
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 6vh;
+  overflow: scroll;
+}
+
+.scroll-section {
+  overflow: scroll;
+  scroll-snap-align: start;
+}
+
+.heroContainer {
+  position: relative;
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.userStory {
+  width: 100%;
+  min-height: 200px;
+  max-height: 300px;
+  background: #28292E;
+  color: white;
+  border-radius: 8px;
+  border: 2px solid #626166;
+  overflow-y: scroll;
+}
+
+.navBarLight {
+  position: fixed;
+  overflow: hidden;
+  z-index: 50;
+  padding: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 6vh;
+  max-height: 0px;
+  background: rgba(255,255,255,0.8);
+  border-bottom: 1px solid #D6D6D6;
+  backdrop-filter: blur(10px);
+  transition: max-height 0.3s ease-in-out;
+}
+
+.navBarDark {
+  position: fixed;
+  overflow: hidden;
+  z-index: 50;
+  padding: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 6vh;
+  max-height: 0px;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(10px);
+  transition: max-height 0.3s ease-in-out;
+}
+
+
+.firstBar, .secondBar {
+  width: 15px;
+  height: 1px;
+  background: #000;
+  border-radius: 16px;
+}
+
+.dark.firstBar, .dark.secondBar {
+  background: #fff;
+}
+
+.light.firstBar, .light.secondBar {
+  background: #000;
+}
+
+.expanded .firstBar {
+  animation: ani1 0.4s ease-out;
+  animation-fill-mode: forwards;
+}
+
+.expanded .secondBar {
+  animation: ani2 0.4s ease-out;
+  animation-fill-mode: forwards;
+}
+
+.collapsed .firstBar {
+  animation: ani3 0.4s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.collapsed .secondBar {
+  animation: ani4 0.4s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes ani1 {
+  0% {}
+  25% {transform: translateY(5px);}
+  100% {transform: translateY(2px) rotate(-45deg);}
+}
+
+@keyframes ani2 {
+  0% {}
+  25% {transform: translateY(-5px);}
+  100% {transform: translateY(-5px) rotate(45deg);}
+}
+
+@keyframes ani3 {
+  0% {transform: translateY(5px) rotate(-45deg);}
+  50% {transform: translateY(5px);}
+  100% {}
+}
+
+@keyframes ani4 {
+  0% {transform: translateY(-5px) rotate(45deg);}
+  50% {transform: translateY(-5px);}
+  100% {}
+}
+
+.footer {
+  background: #1F2225;
+  background-image: linear-gradient(180deg,rgba(31,34,37,0) 0%, #1f2225 45%), url("/images/footer-bg.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0 0, center center;
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(6vh);
+  visibility: hidden;
+  transition: opacity 1200ms ease-out, transform 600ms ease-out, visibility 1200ms ease-out;
+  will-change: opacity, transform, visibility;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+@media (min-width: 1024px) {
+  .footer {
+    background-position: 0 0, top left;
+  }
+  
+  .navBarLight, .navBarDark {
+    min-height: 53px;
+  }
+}
