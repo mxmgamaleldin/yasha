@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "@triggerjs/trigger": "^1.0.8",
     "next": "^11.1.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
