@@ -2,19 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.path, .ico-mushroom {
-  fill: none;
-  stroke-width: 5px;
-  stroke: #9CA3AF;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.ico-mushroom {
-  stroke: #9CA3AF;
-  stroke-width: 4px;
-}
-
 .scroll-wrapper, .scroll-section {
   width: 100%;
   height: 100vh;
