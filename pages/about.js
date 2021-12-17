@@ -1,77 +1,59 @@
-import React, { useState, useEffect } from 'react'
-import Image from 'next/image'
-import NavBar from '../components/NavBar'
+import React, { useRef, useEffect } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
+  const headlineRefs = useRef([]);
+  headlineRefs.current = [];
   
-  function doAnimation(element) {
-    const x = getVisibility(element);
-    
-    const targets = element.querySelectorAll(".anim");
-    Array.from(targets).forEach(target => {
-      target.style.animationDelay = (x*-2) + "s";
-    })
-  }
-       
-  function getVisibility(element) {
-    const viewTop = window.pageYOffset;
-    const viewBottom = viewTop + window.innerHeight;
-    const rect = element.getBoundingClientRect();
-    const elementTop = rect.top + viewTop;
-    const elementBottom = rect.height + elementTop;
-    
-
-    if (elementTop >= viewBottom || elementBottom <= viewTop) {
-      // higher or lower than viewport
-      return 0;
-    } else if (elementTop <= viewTop && elementBottom >= viewBottom) {
-      // element is completely in viewport and bigger than viewport
-      return 1;
-    } else if (elementBottom <= viewBottom) {
-      if (elementTop < viewTop) {
-        // intersects viewport top
-        return (elementBottom - viewTop) / window.innerHeight;
-      } else {
-        // completely inside viewport
-        return (elementBottom - elementTop) / window.innerHeight;
-      }
-    } else {
-      // intersects viewport bottom
-      return (viewBottom - elementTop) / window.innerHeight;
+  const addToRefs = el => {
+    if(el && !headlineRefs.current.includes(el)) {
+      headlineRefs.current.push(el);
     }
-  }
-  
-  function handleScroll(event) {
-    const nodes = document.querySelectorAll(".scroll-node");
-    
-    nodes.forEach(node => {
-      requestAnimationFrame(() => {
-        doAnimation(node);
-      })
-    })
-    
-  }
+  };
   
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true }, false);
-    
-    return () => window.removeEventListener("scroll", handleScroll);    
-  }, []);
+    headlineRefs.current.forEach(headline => {
+      gsap.set(headline, {
+        opacity: 0
+      });
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: headline,
+          start: "20px 85%",
+          end: "+=400 center",
+          scrub: 1
+        }
+      })
+      .to(headline, { opacity: 1, duration: 1})
+      .to(headline, { opacity: 0, duration: 1}, 0.9);      
+    });    
+  }, [addToRefs.current]);
   
-  return (
-    <>
-      <NavBar dark={true} />
-      <div className="scroll-root">
-        <div className="scroll-node" id="node-1">
-          <p className="anim text-5xl font-semibold">Hello, world!</p>
-        </div>
-        <div className="scroll-node" id="node-2">
-          <p className="anim text-5xl font-semibold">Hello, too!</p>
-        </div>
-        <div className="scroll-node" id="node-3">
-          <p className="anim text-5xl font-semibold">Hello, 3!</p>
-        </div>      
-      </div>
-    </>
-  )
+  return (<>
+    <div className="bg-black w-full min-h-screen flex items-center justify-center">
+      <h1 className="text-5xl text-white font-semibold">
+        Hello, section one!
+      </h1>
+    </div>
+    <div className="bg-white w-full min-h-screen py-64 flex flex-col space-y-44 items-center justify-center">
+      <h1 className="text-headline text-cyanblack text-center font-semibold max-w-3xl" ref={addToRefs}>
+        Our most advanced dual‑camera system ever.
+      </h1>
+      <h1 className="text-headline text-cyanblack text-center font-semibold max-w-3xl" ref={addToRefs}>
+        Durability that’s front and center. And edge to edge.
+      </h1>
+      <h1 className="text-headline text-cyanblack text-center font-semibold max-w-2xl" ref={addToRefs}>
+        A lightning-fast chip that leaves the competition behind.
+      </h1>         
+    </div>
+    <div className="bg-black w-full min-h-screen flex items-center justify-center">
+      <h1 className="text-5xl text-white font-semibold">
+        Hello, section three!
+      </h1>
+    </div>    
+  </>);
 }

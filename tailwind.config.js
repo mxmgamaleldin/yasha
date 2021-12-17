@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-        'headline': ['3.5rem', {
-          letterSpacing: '-0.005em',
+        'headline': ['4.0rem', {
+          letterSpacing: '-0.009em',
           lineHeight: '1.0em',
         }],
       },      
