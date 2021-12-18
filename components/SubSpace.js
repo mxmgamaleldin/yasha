@@ -15,24 +15,67 @@ const SubSpace = () => {
     console.log("draw() called");
     
     const ctx = canvas.getContext("2d");
-    var starField = createStarField(canvas);
-    var starsOffset = 0;
     
-    requestAnimationFrame(panStarField);
+    var images = [];
+    var imageURLs = [
+      '/images/star1.png',
+      '/images/star2.png',
+      '/images/star3.png'
+    ];
+    var imagesLoaded = 0;
+    var imagesLength = imageURLs.length;
     
-    // draw warbird sprite
-    drawWarbird();
-    
-    function panStarField () {
-      starsOffset = (starsOffset + scrollSpeed.current) % canvas.height;
-        
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(starField, 0, starsOffset);
-      ctx.drawImage(starField, 0, starsOffset - starField.height);    
-
-      requestAnimationFrame(panStarField);      
+    for(var i=0; i < imagesLength; i++) {
+      images[i] = new Image();
+      images[i].onload = () => {
+        imagesLoaded++;
+        if(imagesLoaded == imagesLength) allLoaded();
+      }
+      images[i].src = imageURLs[i];
     }
     
+    function allLoaded() {
+      console.log("All loaded");
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      let colorMap = ["#EEEEEE", "#767575", "#636363"];
+
+      // seed base starfield
+      for(var i=0; i<100; i++) {
+        let x = Math.floor(Math.random() * canvas.width);
+        let y = Math.floor(Math.random() * canvas.height);
+        ctx.fillStyle = colorMap[Math.floor(Math.random() * 3)];
+        ctx.fillRect(x, y, 2, 2);
+     }
+
+      for(var i=0; i<imagesLength ; i++) {
+        for(var j=0; j<3; j++){
+          let x = Math.floor(Math.random() * canvas.width);
+          let y = Math.floor(Math.random() * canvas.height);        
+          ctx.drawImage(images[i], x, y);
+        }
+      }
+      
+      var starField = document.createElement("img");
+      starField.src = canvas.toDataURL();      
+    
+      var starsOffset = 0;
+      requestAnimationFrame(panStarField);
+      
+      function panStarField() {
+        starsOffset = (starsOffset + scrollSpeed.current) % canvas.height;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(starField, 0, starsOffset);
+        ctx.drawImage(starField, 0, starsOffset - starField.height);    
+
+        requestAnimationFrame(panStarField);      
+      }      
+    } 
+        
+    // draw warbird sprite
+    drawWarbird();
   }
   
   function drawWarbird() {
@@ -56,49 +99,9 @@ const SubSpace = () => {
   
   function createStarField(canvas) {
     console.log("createStarField() called");
-
+   
     const ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    let colorMap = ["#EEEEEE", "#767575", "#636363"];
-    
-    // seed base starfield
-    for(var i=0; i<100; i++) {
-      let x = Math.floor(Math.random() * canvas.width);
-      let y = Math.floor(Math.random() * canvas.height);
-      ctx.fillStyle = colorMap[Math.floor(Math.random() * 3)];
-      ctx.fillRect(x, y, 2, 2);
-   }
-    
-    // load star overlays and seed
-    var images = new Array();
-    images[0] = new Image();
-    images[0].src = '/images/star1.png';
-    images[1] = new Image();
-    images[1].src = '/images/star2.png';
-    images[2] = new Image();
-    images[2].src = '/images/star3.png';
-    images[3] = new Image();
-    images[3].src = '/images/bg06.bmp';
-    
-    var imageCount = images.length;
-    var imagesLoaded = 0;
-    
-    for(var i=0; i<imageCount; i++) {
-      images[i].onload = () => {
-        imagesLoaded++;
-        if(imagesLoaded == imageCount){
-          allLoaded();
-        }
-      }
-    }
-    
-    function allLoaded() {
-      // do something
-    }
-    
-    var starfield = document.createElement("img");
-    starfield.src = canvas.toDataURL();
+
     return starfield;
   }
 
