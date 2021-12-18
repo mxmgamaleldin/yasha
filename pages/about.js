@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import SubSpace from '../components/SubSpace'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -141,9 +142,7 @@ export default function About() {
       </div>       
     </div>
     <div className="bg-black w-full min-h-screen flex items-center justify-center">
-      <h1 className="text-5xl text-white font-semibold">
-        Placeholder
-      </h1>
+      <SubSpace />
     </div>   
   </>);
 }

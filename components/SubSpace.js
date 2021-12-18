@@ -1,4 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
+import Head from "next/head";
+import Link from "next/link";
 
 const SubSpace = () => {
   const [dimensions, setDimensions] = useState({ width: 1, height: 1 });
@@ -44,6 +46,9 @@ const SubSpace = () => {
       let shipX = Math.floor(dimensions.width / 2) - warbird.width;
       let shipY = Math.floor(dimensions.height) - warbird.height - Math.floor(0.2 * dimensions.height);
       gv.drawImage(warbird, shipX, shipY);
+      gv.font = "12px SubSpace";
+      gv.fillStyle = "#F3B710";
+      gv.fillText("a quiet boy (23)", shipX + warbird.width + 2, shipY + warbird.height + 8);
     };
     warbird.src = '/images/warbird.png';
 
@@ -54,19 +59,44 @@ const SubSpace = () => {
 
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.beginPath();
-    for(let i = 0; i < 200; i++) {
-      let starX = Math.floor(Math.random() * canvas.width);
-      let starY = Math.floor(Math.random() * canvas.height);
-      let starRadius = Math.floor(Math.random() * 3);
-      ctx.arc(starX, starY, starRadius, 0, 2 * Math.PI);
-      ctx.stroke();
-      ctx.closePath();
-    }    
-    ctx.fillStyle = "gray";
-    ctx.fill();
-
+    
+    let colorMap = ["#EEEEEE", "#767575", "#636363"];
+    
+    // seed base starfield
+    for(var i=0; i<100; i++) {
+      let x = Math.floor(Math.random() * canvas.width);
+      let y = Math.floor(Math.random() * canvas.height);
+      ctx.fillStyle = colorMap[Math.floor(Math.random() * 3)];
+      ctx.fillRect(x, y, 2, 2);
+   }
+    
+    // load star overlays and seed
+    var images = new Array();
+    images[0] = new Image();
+    images[0].src = '/images/star1.png';
+    images[1] = new Image();
+    images[1].src = '/images/star2.png';
+    images[2] = new Image();
+    images[2].src = '/images/star3.png';
+    images[3] = new Image();
+    images[3].src = '/images/bg06.bmp';
+    
+    var imageCount = images.length;
+    var imagesLoaded = 0;
+    
+    for(var i=0; i<imageCount; i++) {
+      images[i].onload = () => {
+        imagesLoaded++;
+        if(imagesLoaded == imageCount){
+          allLoaded();
+        }
+      }
+    }
+    
+    function allLoaded() {
+      // do something
+    }
+    
     var starfield = document.createElement("img");
     starfield.src = canvas.toDataURL();
     return starfield;
@@ -92,10 +122,10 @@ const SubSpace = () => {
   
   const onKeyDown = ({key}) => {
     if(key == 'ArrowUp') {
-      if(scrollSpeed.current < maxScrollSpeed) scrollSpeed.current += 1;
+      if(scrollSpeed.current < maxScrollSpeed) scrollSpeed.current++;
     }
     else if(key == 'ArrowDown') {
-      if(scrollSpeed.current > 0) scrollSpeed.current -= 1;
+      if(scrollSpeed.current > 0) scrollSpeed.current--;
     }
   }    
   
@@ -135,9 +165,12 @@ const SubSpace = () => {
   }, [scrollSpeed])
   
   return (<>
+    <Head>
+      <link rel="preload" href="fonts/SubSpace-Regular.ttf" as="font" crossOrigin=""/>
+    </Head>
     <div className="w-full min-h-screen relative">
       <canvas ref={canvas} style={{ background: "black", position: "absolute" }} />
-      <canvas ref={gameView} style={{ position: "absolute" }} />      
+      <canvas ref={gameView} style={{ position: "absolute" }} />
     </div>    
   </>)
 }
