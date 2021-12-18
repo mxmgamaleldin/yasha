@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import NavBar from '../components/NavBar'
 import SubSpace from '../components/SubSpace'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -107,10 +108,12 @@ export default function About() {
   }, [addToRefs.current]);
   
   return (<>
-    <div className="bg-black w-full min-h-screen flex items-center justify-center">
-      <h1 className="text-5xl text-white font-semibold">
-        Placeholder
-      </h1>
+    <NavBar dark={true} />
+    <div className="bg-black w-full min-h-screen">
+     <div className="px-5 lg:mx-auto lg:max-w-screen-xl lg:px-8 lg:pb-16 pt-40">
+        <h1 className="text-headline lg:max-w-4xl lg:text-7xl text-white font-semibold lg:leading-tight">Bring your idea to life.</h1>
+        <p className="mt-10 lg:mt-16 text-lg lg:text-2xl lg:max-w-2xl text-gray-300">It all starts with <span className="font-semibold text-white">good design.</span><br/><br/> As experts in digital product design, we help you develop your initial idea into a meaningful customer-centric experience that your end users will navigate with ease.<br/><br/>Design <span className="font-semibold text-white">beautiful products that work.</span><br/><br/><span className="underline font-semibold text-white">All you need is an idea.</span></p>
+      </div>
     </div>
     <div className="bg-black w-full min-h-screen py-64 flex flex-col space-y-32 items-center justify-center">
       <div className="flex flex-col items-center justify-center space-y-8">    
