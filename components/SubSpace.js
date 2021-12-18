@@ -24,7 +24,7 @@ const SubSpace = () => {
   })
   
   useEffect(() => {
-    draw(canvas.current, dimensions.width, dimensions.height);
+    draw(canvas.current);
   }, [dimensions])
   
   return (<>
@@ -34,31 +34,47 @@ const SubSpace = () => {
   </>)
 }
 
-function draw(canvas, width, height) {
-  console.log("draw() called with " + width, height);
+function draw(canvas) {
+  console.log("draw() called with " + canvas.width, canvas.height);
+  const ctx = canvas.getContext("2d");
+  let fps = 60;
+  var starField = createStarField(canvas);
+  var starsOffset = 0;
+
+  requestAnimationFrame(panStarField);
+  
+  function panStarField() {
+    starsOffset = (starsOffset + 2) % canvas.height;
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(starField, 0, starsOffset);
+    ctx.drawImage(starField, 0, starsOffset - starField.height);    
+    
+    requestAnimationFrame(panStarField);
+  }
+}
+
+function createStarField(canvas) {
+  console.log("createStarField() called");
   
   const ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
   ctx.beginPath();
   for(let i = 0; i < 200; i++) {
-    let starX = Math.floor(Math.random() * width);
-    let starY = Math.floor(Math.random() * height);
+    let starX = Math.floor(Math.random() * canvas.width);
+    let starY = Math.floor(Math.random() * canvas.height);
     let starRadius = Math.floor(Math.random() * 3);
     ctx.arc(starX, starY, starRadius, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.closePath();
   }    
-  
   ctx.fillStyle = "gray";
   ctx.fill();
-  
+
   var starfield = document.createElement("img");
   starfield.src = canvas.toDataURL();
-}
-
-function createStarfield(){
-  
+  return starfield;
 }
 
 function debounce(fn, ms) {
