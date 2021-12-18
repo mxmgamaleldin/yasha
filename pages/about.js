@@ -8,6 +8,7 @@ export default function About() {
   const icoLightning = React.createRef();
   const icoRocket = React.createRef();
   const icoMushroom = React.createRef();
+  
   const headlineRefs = useRef([]);
   headlineRefs.current = [];
   
@@ -59,7 +60,7 @@ export default function About() {
     });    
         
     gsap.set(icoMushroom.current, {
-      yPercent: -200,
+      yPercent: -100,
       opacity: 0
     });
     
@@ -75,17 +76,13 @@ export default function About() {
       opacity: 1,
       duration: 2,
       yPercent: 0,
+      scale: 1.2,
       ease: "bounce.out"
     })
     .to(icoMushroom.current, {
-      scale: 1.2,
-      ease: "bounce.out",
-      delay: 2,
-      duration: 1
-    })
-    .to(icoMushroom.current, {
       scale: 1,
-      delay: 1,
+      delay: 0.5,
+      ease: "bounce.out",
       duration: 0.5
     })
     ;
@@ -114,7 +111,7 @@ export default function About() {
         Placeholder
       </h1>
     </div>
-    <div className="bg-white w-full min-h-screen py-64 flex flex-col space-y-44 items-center justify-center">
+    <div className="bg-white w-full min-h-screen py-64 flex flex-col space-y-32 items-center justify-center">
       <div className="flex flex-col items-center justify-center space-y-8">    
         <svg width="69" height="96" viewBox="0 0 24 32" ref={icoLightning}>
           <polygon fill="none" stroke="#9CA3AF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="12 11 20 0 2 11 8 17 0 28 18 17" transform="translate(2 2)"/>
@@ -147,6 +144,6 @@ export default function About() {
       <h1 className="text-5xl text-white font-semibold">
         Placeholder
       </h1>
-    </div>    
+    </div>   
   </>);
 }
