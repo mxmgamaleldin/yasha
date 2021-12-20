@@ -57,8 +57,8 @@ export default function Sample() {
     const iconsTL1 = gsap.timeline({
       scrollTrigger: {
         trigger: icoLightning.current,
-        start: "top 70%",
-        end: "+=100",
+        start: "bottom bottom",
+        end: "top center",
         scrub: 1
       }
     })
@@ -77,8 +77,8 @@ export default function Sample() {
     const iconsTL2 = gsap.timeline({
       scrollTrigger: {
         trigger: icoRocket.current,
-        start: "top 70%",
-        end: "+=100",
+        start: "bottom bottom",
+        end: "top center",
         scrub: 1
       }
     })
@@ -96,8 +96,8 @@ export default function Sample() {
     const iconsTL3 = gsap.timeline({
       scrollTrigger: {
         trigger: icoMushroom.current,
-        start: "top 70%",
-        end: "+=100",
+        start: "bottom bottom",
+        end: "top center",
         scrub: 1
       }
     })

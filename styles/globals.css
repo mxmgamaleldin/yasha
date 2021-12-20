@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+#hero-img-wrapper {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	overflow: hidden;
+}
+
+#hero-img-wrapper img{
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+	right: -9999px;
+	bottom: -9999px;
+	margin: auto;
+}
+
 /*
 		Colors.
 */
@@ -180,22 +196,6 @@
 	background: #000;
 }
 
-.scroll-wrapper, .scroll-section {
-  width: 100%;
-  height: 100vh;
-}
-
-.scroll-wrapper {
-  scroll-snap-type: y mandatory;
-  scroll-padding-top: 6vh;
-  overflow: scroll;
-}
-
-.scroll-section {
-  overflow: scroll;
-  scroll-snap-align: start;
-}
-
 .heroContainer {
   position: relative;
   text-align: center;
@@ -204,16 +204,9 @@
   overflow: hidden;
 }
 
-.userStory {
-  width: 100%;
-  min-height: 200px;
-  max-height: 300px;
-  background: #28292E;
-  color: white;
-  border-radius: 8px;
-  border: 2px solid #626166;
-  overflow-y: scroll;
-}
+/*
+		Navigation Bar (header) and footer.
+*/
 
 .navBarLight {
   position: fixed;
@@ -312,20 +305,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 0 0, center center;
-}
-
-.fade-in-section {
-  opacity: 0;
-  transform: translateY(6vh);
-  visibility: hidden;
-  transition: opacity 1200ms ease-out, transform 600ms ease-out, visibility 1200ms ease-out;
-  will-change: opacity, transform, visibility;
-}
-
-.fade-in-section.is-visible {
-  opacity: 1;
-  transform: none;
-  visibility: visible;
 }
 
 @media (min-width: 1024px) {
