@@ -2,14 +2,180 @@
 @tailwind components;
 @tailwind utilities;
 
-.space-container {
-  position: relative;
-  width: 100%;
-  height: 400vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/*
+		Colors.
+*/
+
+.txt-lightgray {
+	color: #9CA3AF;
+}
+
+.txt-darkgray {
+	color: #6B7280;
+}
+
+.txt-black {
+	color: #010B13;
+}
+
+/*
+		Block elements (text sections, etcetera).
+*/				
+						
+.heading {
+	font-size: 4.0rem;
+	font-weight: 600;
+	letter-spacing: -0.009em;
+	line-height: 1.0em;
+	margin-bottom: 2rem;
+}
+
+.heading.dark {
+	color: #FFF;
+}
+
+.blocks {
+	padding: 0 1.5rem;
+}
+
+.blocks h1 {
+	font-size: 1.875rem;
+	font-weight: 800;
+	letter-spacing: -0.025rem;
+	line-height: 1;
+	margin-bottom: 2rem;
+}
+
+.blocks p {
+	font-size: 1.125rem;
+	font-weight: 500;
+	line-height: 1.75rem;
+	margin-bottom: 1.5rem;
+}
+
+.blocks.light h1 {
+	color: #010B13;
+}
+
+.blocks.light p {
+	color: #6B7280;
+}
+
+.blocks.dark h1 {
+	color: #FFF;
+}
+
+.blocks.dark p {
+	color: #D1D5DB;
+}
+
+.headlines-wrapper {
+	background: #222;
+	width: 100%;
+	min-height: 100vh;
+	padding: 7rem 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: left;
+}
+
+.headlines-wrapper div * {
+	margin-bottom: 1rem;
+}
+
+.headlines-wrapper h1 {
+	font-size: 1.9rem;
+	line-height: 1.125;
+	font-weight: 600;
+	letter-spacing: .004em;
+	color: #FFF;
+}
+
+.headlines-wrapper svg {
+	height: 50px;
+}
+
+.headlines-wrapper * {
+	margin-bottom: 8rem;
+}
+
+/*
+		Responsive classes (for desktop).
+*/
+
+@media (min-width: 1024px) {
+
+	.container {
+		margin: 0 auto;
+	}
+	
+	.heading {
+		font-size: 4.5rem;
+		line-height: 1.25em;
+	}
+	
+	.blocks {
+		padding: 0 2rem;
+	}
+	
+	.blocks h1 {
+		font-size: 3.75rem;
+	}
+	
+	.blocks p {
+		font-size: 1.5rem;
+		line-height: 2.5rem;
+		max-width: 42rem;
+	}
+	
+	.headlines-wrapper {
+		padding: 16rem 0;
+		align-items: center;
+	}
+	
+	.headlines-wrapper div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.headlines-wrapper div * {
+		margin-bottom: 2rem;
+	}
+	
+	.headlines-wrapper h1 {
+		font-size: 3.75rem;
+		line-height: 1.0625;
+		letter-spacing: -0.009em;
+		text-align: center;
+	}
+	
+	.headlines-wrapper svg {
+		height: 96px;
+	}
+	
+	.headlines-wrapper * {
+		margin-bottom: 8rem;
+	}
+		
+}
+
+/*
+		Containers.
+*/
+
+.container {
+	width: 100%;
+	height: 100vh;
+}
+
+.container.light {
+	background: #FFF;
+}
+
+.container.dark {
+	background: #000;
 }
 
 .scroll-wrapper, .scroll-section {

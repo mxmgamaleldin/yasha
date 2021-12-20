@@ -19,7 +19,7 @@ function Home() {
           <section id="user-needs">
             <div className="px-5 sm:px-6 md:px-8 mb-10 sm:mb-16 md:mb-20">
               <h2 className="text-3xl sm:text-5xl lg:text-6xl leading-none font-extrabold text-cyanblack tracking-tight mb-8">Laser-focused user needs.</h2>
-              <p className="max-w-4xl text-lg sm:text-2xl font-medium sm:leading-10 space-y-6 mb-6 text-gray-500">We guide you to refine what <span className="italic">you think your users want</span> to what <span className="italic">we know they really need.</span></p>
+              <p className="max-w-2xl text-lg sm:text-2xl font-medium sm:leading-10 space-y-6 mb-6 text-gray-500">We guide you to refine what <span className="italic">you think your users want</span> to what <span className="italic">we know they really need.</span></p>
               <a href="#" className="font-medium text-cyanblack text-lg sm:text-2xl lg:text-2xl hover:underline hover:opacity-75 transition-opacity duration-200 focus:underline">Get in touch →</a>
             </div>
           </section>
