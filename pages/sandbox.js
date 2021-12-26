@@ -8,16 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Sandbox() {
 	
-	useEffect(() => {
-		
-		const heroTL = gsap.timeline();
-		heroTL.("#hero-wrapper", {
-			duration: 1,
-			height: "auto"
-		});
-
-	}, []);
-	
   return (<>
 			<NavBar />
 			<div className="container dark">
@@ -28,7 +18,6 @@ export default function Sandbox() {
 					src="/images/hero.jpeg"
 					layout="fill"
 					objectFit="cover"
-					objectPosition="0 0"
 					quality={100}
 				/>						
 			</div>
