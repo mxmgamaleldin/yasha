@@ -5,7 +5,7 @@ import NavBar from '../components/NavBar'
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Sample() {
+export default function Showcase() {
 	
 	/*
 			ANIMATION SECTIONS.
